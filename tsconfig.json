@@ -9,5 +9,9 @@
     {
       "path": "./backend"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  }
 }

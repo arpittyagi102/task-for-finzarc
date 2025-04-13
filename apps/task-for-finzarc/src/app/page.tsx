@@ -25,7 +25,7 @@ export default async function Index() {
                 Hello from Frontend !!
             </h1>
             <h1 className="text-3xl font-bold align-center text-center m-4">
-                {data.message}
+                {data.message || 'Error fetching data'}
             </h1>
            
         </div>

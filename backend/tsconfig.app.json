@@ -6,8 +6,14 @@
     "types": ["node", "express"],
     "rootDir": "src",
     "moduleResolution": "nodenext",
-    "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo"
+    "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["eslint.config.js", "eslint.config.cjs", "eslint.config.mjs"]
+  "include": ["src/*"],  
+  "exclude": ["eslint.config.js", "eslint.config.cjs", "eslint.config.mjs"],
+  "files": [
+    "./src/main.ts",
+    "./src/assets/database.json", 
+  ]
 }
