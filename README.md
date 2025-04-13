@@ -8,10 +8,22 @@
 
 ## Run tasks
 
-To run the dev server for your app, use:
+To run the dev server for your Frontend, use:
 
 ```sh
 npx nx dev task-for-finzarc
+```
+
+To create a production bundle:
+
+```sh
+npx nx build task-for-finzarc
+```
+
+To run the dev server for your Frontend, use:
+
+```sh
+npx nx dev @task-for-finzarc/backend
 ```
 
 To create a production bundle:

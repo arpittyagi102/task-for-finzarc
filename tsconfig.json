@@ -5,6 +5,9 @@
   "references": [
     {
       "path": "./apps/task-for-finzarc"
+    },
+    {
+      "path": "./backend"
     }
   ]
 }
