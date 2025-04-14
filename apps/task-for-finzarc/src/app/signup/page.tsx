@@ -88,7 +88,7 @@ export default function SignUp() {
         }
 
         try {
-            const response = await fetch('http://localhost:3333/api/auth/signup', {
+            const response = await fetch('https://task-for-finzarc.onrender.com/api/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

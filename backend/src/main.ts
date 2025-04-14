@@ -11,7 +11,13 @@ import taskRoutes from './routes/task.routes';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }));
+app.options('*', cors());
+  
 app.use(express.json());
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));

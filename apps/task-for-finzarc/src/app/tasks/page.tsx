@@ -9,7 +9,7 @@ import { showToast } from "@/utils/toast";
 export default function Home() {
     const router = useRouter();
 
-    const [user, setUser] = useState<User>(); 
+    const [user, setUser] = useState<User>();
     const [tasks, setTasks] = useState<Task[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [taskTitle, setTaskTitle] = useState("");
@@ -17,7 +17,7 @@ export default function Home() {
     useEffect(() => {
         // fetching tasks from the server
         const token = localStorage.getItem("token");
-        if(!token){
+        if (!token) {
             router.push("/login");
             return;
         }
@@ -28,22 +28,22 @@ export default function Home() {
 
     async function fetchTasks() {
         try {
-            const response = await fetch('http://localhost:3333/api/tasks', {
+            const response = await fetch('https://task-for-finzarc.onrender.com/api/tasks', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             });
-    
+
             if (!response.ok) {
                 showToast("Failed to fetch tasks", "error");
                 return;
             }
-    
+
             const user = await response.json();
             setTasks(user.tasks);
-            
+
         } catch (error) {
             console.error("Error fetching tasks:", error);
             showToast("Failed to fetch tasks", "error");
@@ -56,14 +56,14 @@ export default function Home() {
         if (event.key === "Enter") {
             const newTask = { id: Date.now().toString(), title: taskTitle, completed: false };
             setTasks([...tasks, newTask]);
-            if(!user){
+            if (!user) {
                 showToast("Failed to add task", "error");
                 return;
             }
             setTaskTitle("");
 
             try {
-                const response = await fetch('http://localhost:3333/api/tasks', {
+                const response = await fetch('https://task-for-finzarc.onrender.com/api/tasks', {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -73,11 +73,11 @@ export default function Home() {
                     body: JSON.stringify(newTask)
                 });
 
-                if(!response.ok){
+                if (!response.ok) {
                     showToast("Failed to add task", "error");
-                    setTasks(tasks.filter((task: Task) => task.id !== newTask.id)); 
+                    setTasks(tasks.filter((task: Task) => task.id !== newTask.id));
                 }
-        
+
             } catch (error) {
                 showToast("Failed to add task", "error");
                 console.error("Error adding task:", error);
@@ -88,13 +88,13 @@ export default function Home() {
     async function deleteTask(id: string | number) {
         setTasks(tasks.filter((task: Task) => task.id !== id));
 
-        if(!user){
+        if (!user) {
             showToast("Failed to delete task", "error");
             return;
         }
 
         try {
-            const response = await fetch(`http://localhost:3333/api/tasks/${id}`, {
+            const response = await fetch(`https://task-for-finzarc.onrender.com/api/tasks/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -103,7 +103,7 @@ export default function Home() {
                 }
             });
 
-            if(!response.ok){
+            if (!response.ok) {
                 showToast("Failed to delete task", "error");
             }
 
