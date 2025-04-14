@@ -22,13 +22,13 @@ export default function Navbar() {
     }
 
     return (
-        <header className="w-full flex justify-between items-center p-2 lg:px-40 sticky top-0 bg-gray-700 text-white shadow-md z-10">
-            <h1 className="text-2xl font-bold">Project Management</h1>
+        <header className="w-full flex justify-between items-center p-2 lg:px-40 sticky top-0 bg-[#bbbbbb58] backdrop-blur-lg text-black shadow-md z-10">
+            <h1 className="text-2xl font-thin">Project Management</h1>
 
             <div className='flex items-center gap-3'>
                 {isLoggedIn ? (
                     <>  
-                        <span className="text-lg font-bold">Hello {user && user.fName}</span>
+                        <span className="text-lg font-bold ">Hello, {user && user.fName} 👋</span>
                         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-bold" onClick={handleSignOut}>Sign Out</button>
                     </>
                 ) : (

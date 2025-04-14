@@ -1,36 +1,21 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
+import Link from 'next/link';
 
 export default async function Index() {
-    const data = await getData();
 
     return (
-        <main>
+        <main className='h-screen bg-cover bg-no-repeat' style={{ backgroundImage: 'url(/bg.jpg)', backgroundPosition: 'center' }}>
             <Navbar />
-            <h1 className="text-3xl font-bold align-center text-center m-4">
-                Hello from Frontend !!
-            </h1>
-            <h1 className="text-3xl font-bold align-center text-center m-4">
-                {data.message || 'Error fetching data'}
-            </h1>
-           
+
+            <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center w-screen'>
+                <h1 className="text-6xl font-bold align-center text-center m-4 w-full text-neutral-700">
+                    Never Forget Your Tasks
+                </h1>
+                <Link href="/tasks" className='text-2xl px-8 mt-6 py-2 border border-black rounded-full font-bold backdrop-blur-sm hover:bg-neutral-800 hover:text-neutral-300'> Get Started </Link>
+            </div>
         </main>
     );
 }
 
-async function getData() {
-    try {
-        const res = await fetch('http://localhost:3333/api', {
-            cache: 'no-store',
-        });
-        if (!res.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        return res.json();
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return { message: 'Error fetching data' };
-    }
-}
 
