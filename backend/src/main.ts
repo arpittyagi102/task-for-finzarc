@@ -6,8 +6,8 @@
 import express from 'express';
 import cors from 'cors';
 import * as path from 'path';
-
-import { login, signup } from './controllers/auth.controllers';
+import authRoutes from './routes/auth.routes';
+import taskRoutes from './routes/task.routes';
 
 const app = express();
 
@@ -20,8 +20,8 @@ app.get('/api', (req, res) => {
   res.send({ message: 'Hello from Backend !!' });
 });
 
-app.post('/api/login', login);
-app.post('/api/signup', signup);
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
 
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {

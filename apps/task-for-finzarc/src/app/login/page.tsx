@@ -3,10 +3,10 @@
 import React, { useState, useRef, FormEvent } from 'react';
 import { showToast } from '@/utils/toast';
 import { Berkshire_Swash } from "next/font/google";
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-const berkshire_swash = Berkshire_Swash({ subsets: ["latin"], weight: ["400"]});
+const berkshire_swash = Berkshire_Swash({ subsets: ["latin"], weight: ["400"] });
 
 export default function SignUp() {
     const [email, setEmail] = useState('');
@@ -15,14 +15,14 @@ export default function SignUp() {
     const router = useRouter(); // Initialize useRouter hook
 
     const emailInputRef = useRef<HTMLInputElement>(null);
-    const passwordInputRef = useRef<HTMLInputElement>(null); 
+    const passwordInputRef = useRef<HTMLInputElement>(null);
 
     const handleLogin = async (e: FormEvent) => {
         setInProgress(true);
         e.preventDefault();
         if (!email) {
             if (emailInputRef.current) {
-                emailInputRef.current.focus(); 
+                emailInputRef.current.focus();
                 emailInputRef.current.style.border = '1px solid red';
             }
             showToast('Email is required', 'error');
@@ -38,10 +38,10 @@ export default function SignUp() {
             setInProgress(false);
             return;
         }
-        
+
         // Sign in here
         try {
-            const response = await fetch('http://localhost:3333/api/login', {
+            const response = await fetch('http://localhost:3333/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -50,17 +50,17 @@ export default function SignUp() {
             })
 
             setInProgress(false);
-    
-            if(response?.ok){
+
+            if (response?.ok) {
                 const { token } = await response.json();
-                localStorage.setItem('token', token); 
-                
+                localStorage.setItem('token', token);
+
                 showToast('Logged in successfully', 'success');
-                router.push('/');
+                router.push('/tasks');
             } else {
                 showToast('Invalid credentials', 'error');
             }
-            
+
         } catch (error) {
             setInProgress(false);
             console.error("Error during login: ", error);
@@ -71,7 +71,7 @@ export default function SignUp() {
 
     return (
         <div className="min-h-screen flex items-stretch text-white">
-            <div className="lg:flex grow hidden bg-gray-500 bg-no-repeat bg-cover relative items-center backdrop-blur" style={{backgroundImage: `url('/task.jpg')`}}>
+            <div className="lg:flex grow hidden bg-gray-500 bg-no-repeat bg-cover relative items-center backdrop-blur" style={{ backgroundImage: `url('/task.jpg')` }}>
                 <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
                 <div className="w-full px-24 z-10">
                     <h1 className="text-5xl font-bold text-left tracking-wide">Time is Money</h1>
@@ -90,10 +90,10 @@ export default function SignUp() {
 
                     <form className="w-full px-4 lg:px-0" onSubmit={handleLogin}>
                         <div className="pb-2 pt-4">
-                            <input ref={emailInputRef} className="block w-full p-4 text-lg rounded-xl bg-neutral-300 focus:outline-none" type="email" name="email" id="email" placeholder="Email" value={email} onChange={(e) => {setEmail(e.target.value); e.target.style.border = "none"}}/>
+                            <input ref={emailInputRef} className="block w-full p-4 text-lg rounded-xl bg-neutral-300 focus:outline-none" type="email" name="email" id="email" placeholder="Email" value={email} onChange={(e) => { setEmail(e.target.value); e.target.style.border = "none" }} />
                         </div>
                         <div className="pb-1 pt-4">
-                            <input ref={passwordInputRef} className="block w-full p-4 text-lg rounded-xl bg-neutral-300 focus:outline-none" type="password" name="password" id="password" placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value);  e.target.style.border = "none"}}/>
+                            <input ref={passwordInputRef} className="block w-full p-4 text-lg rounded-xl bg-neutral-300 focus:outline-none" type="password" name="password" id="password" placeholder="Password" value={password} onChange={(e) => { setPassword(e.target.value); e.target.style.border = "none" }} />
                         </div>
                         <div className="text-right text-neutral-600 hover:text-black">
                             <Link href="/signup" className="text-right text-neutral-600 hover:text-black">Don&apos;t have an account?</Link>
@@ -106,8 +106,8 @@ export default function SignUp() {
                                         <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24" fill="none" stroke="#FFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                                             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                                            <g id="SVGRepo_iconCarrier"> 
-                                                <path d="M21 12a9 9 0 11-6.219-8.56"></path> 
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path d="M21 12a9 9 0 11-6.219-8.56"></path>
                                             </g>
                                         </svg>
                                     </span>

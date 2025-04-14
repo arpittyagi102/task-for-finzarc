@@ -88,7 +88,7 @@ export default function SignUp() {
         }
 
         try {
-            const response = await fetch('http://localhost:3333/api/signup', {
+            const response = await fetch('http://localhost:3333/api/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -101,7 +101,7 @@ export default function SignUp() {
                 })
             })
 
-            if(response.status === 409) {
+            if (response.status === 409) {
                 showToast("This user already exists", 'error');
                 router.push('/login');
 
