@@ -19,7 +19,7 @@ const loadDb = (): User[] => {
 };
 
 const signup = (req: Request, res: Response) => {
-    const { name, email, password } = req.body;
+    const { fName, lName, email, password } = req.body;
     const db = loadDb();
     const existingUser = db.find((u: User) => u.email === email);
 
@@ -27,7 +27,7 @@ const signup = (req: Request, res: Response) => {
         return res.status(409).json({ message: 'User already exists' });
     }
 
-    const newUser: User = { name, email, password, tasks: [] };
+    const newUser: User = { fName, lName, email, password, tasks: [] };
     db.push(newUser);
 
     // Make sure the directory exists
@@ -50,7 +50,7 @@ const login = (req: Request, res: Response) => {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ name: user.name, email: user.email }, JWT_SECRET);
+        const token = jwt.sign({ fName: user.fName, lName: user.lName, email: user.email }, JWT_SECRET);
         return res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
         console.error('Error during login:', error);

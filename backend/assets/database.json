@@ -1,6 +1,7 @@
 [
   {
-    "name": "Arpit Tyagi",
+    "fName": "Arpit",
+    "lName": "Tyagi",
     "email": "arpittyagi102@gmail.com",
     "password": "123456789",
     "tasks": [
@@ -19,9 +20,10 @@
     ]
   },
   {
-    "name": "Tyagi Tyagi",
-    "email": "arpittyagi@gmail.com",
-    "password": "987654321",
+    "fName": "ab",
+    "lName": "cd",
+    "email": "abcd@1234.com",
+    "password": "abcd1234",
     "tasks": []
   }
 ]

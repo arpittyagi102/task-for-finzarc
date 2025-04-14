@@ -28,7 +28,7 @@ export default function Navbar() {
             <div className='flex items-center gap-3'>
                 {isLoggedIn ? (
                     <>  
-                        <span className="text-lg font-bold">Hello {user && user.name}</span>
+                        <span className="text-lg font-bold">Hello {user && user.fName}</span>
                         <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-bold" onClick={handleSignOut}>Sign Out</button>
                     </>
                 ) : (
@@ -41,6 +41,7 @@ export default function Navbar() {
 }
 
 interface User {
-    name: string;
+    fName: string;
+    lName: string;
     email: string;
 }

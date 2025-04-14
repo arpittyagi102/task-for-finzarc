@@ -6,7 +6,8 @@ interface Task {
 }
 
 interface User {
-    name: string;
+    fName: string;
+    lName: string;
     email: string;
     password: string;
     tasks: Task[];
