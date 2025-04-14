@@ -12,9 +12,9 @@ import taskRoutes from './routes/task.routes';
 const app = express();
 
 app.use(cors({
-    origin: '*',
+    origin: '*', 
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'email'], 
   }));
 app.options('*', cors());
   
