@@ -14,6 +14,6 @@
   "exclude": ["eslint.config.js", "eslint.config.cjs", "eslint.config.mjs"],
   "files": [
     "./src/main.ts",
-    "./src/assets/database.json", 
+    "./assets/database.json", 
   ]
 }

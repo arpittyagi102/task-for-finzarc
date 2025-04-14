@@ -143,5 +143,5 @@ export default function Item(props: ItemProps) {
 }
 
 interface ItemProps extends Task {
-    deleteTask: (id: string) => void;
+    deleteTask: (id: string|number) => void;
 }

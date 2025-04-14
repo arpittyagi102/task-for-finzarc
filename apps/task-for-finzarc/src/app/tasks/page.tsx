@@ -88,6 +88,11 @@ export default function Home() {
     async function deleteTask(id: string | number) {
         setTasks(tasks.filter((task: Task) => task.id !== id));
 
+        if(!user){
+            showToast("Failed to delete task", "error");
+            return;
+        }
+
         try {
             const response = await fetch(`http://localhost:3333/api/tasks/${id}`, {
                 method: "DELETE",
