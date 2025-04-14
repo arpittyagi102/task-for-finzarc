@@ -4,6 +4,7 @@ import React, { useState, useRef, FormEvent } from 'react';
 import { showToast } from '@/utils/toast';
 import { Berkshire_Swash } from "next/font/google";
 import { useRouter } from 'next/navigation'; 
+import Link from 'next/link';
 
 const berkshire_swash = Berkshire_Swash({ subsets: ["latin"], weight: ["400"]});
 
@@ -51,6 +52,9 @@ export default function SignUp() {
             setInProgress(false);
     
             if(response?.ok){
+                const { token } = await response.json();
+                localStorage.setItem('token', token); 
+                
                 showToast('Logged in successfully', 'success');
                 router.push('/');
             } else {
@@ -83,16 +87,20 @@ export default function SignUp() {
                         Task Manager
                     </h1>
 
+
                     <form className="w-full px-4 lg:px-0" onSubmit={handleLogin}>
                         <div className="pb-2 pt-4">
                             <input ref={emailInputRef} className="block w-full p-4 text-lg rounded-xl bg-neutral-300 focus:outline-none" type="email" name="email" id="email" placeholder="Email" value={email} onChange={(e) => {setEmail(e.target.value); e.target.style.border = "none"}}/>
                         </div>
-                        <div className="pb-2 pt-4">
+                        <div className="pb-1 pt-4">
                             <input ref={passwordInputRef} className="block w-full p-4 text-lg rounded-xl bg-neutral-300 focus:outline-none" type="password" name="password" id="password" placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value);  e.target.style.border = "none"}}/>
+                        </div>
+                        <div className="text-right text-neutral-600 hover:text-black">
+                            <Link href="/signup" className="text-right text-neutral-600 hover:text-black">Don&apos;t have an account?</Link>
                         </div>
 
                         <div className="px-4 pb-2 pt-4 text-white flex justify-center">
-                            <button className="w-full p-3 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 flex justify-center focus:outline-none">
+                            <button className="w-full p-3 text-lg rounded-full bg-gradient-to-r from-indigo-500 to-purple-400 hover:to-indigo-600 font-bold flex justify-center focus:outline-none">
                                 {inProgress ? (
                                     <span className='block w-min'>
                                         <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24" fill="none" stroke="#FFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

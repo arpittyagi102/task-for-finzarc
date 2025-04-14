@@ -2,13 +2,16 @@ import { Request, Response } from 'express';
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import path from 'path';
 import { User } from '../models/types';
+import jwt from 'jsonwebtoken';
 
 const dbDir = path.resolve(__dirname, '../assets');
 const dbPath = path.join(dbDir, 'database.json');
 
-// Importing JSON at compile time won't reflect runtime updates.
-// So don't use: import db from '../assets/database.json';
-// Instead, read it dynamically:
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+    throw new Error('JWT_SECRET is not defined in environment variables');
+}
+
 const loadDb = (): User[] => {
     if (!existsSync(dbPath)) return [];
     const raw = require('fs').readFileSync(dbPath, 'utf-8');
@@ -47,7 +50,8 @@ const login = (req: Request, res: Response) => {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
-        return res.status(200).json({ message: 'Login successful' });
+        const token = jwt.sign({ name: user.name, email: user.email }, JWT_SECRET);
+        return res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
         console.error('Error during login:', error);
         return res.status(500).json({ message: 'Internal server error' });

@@ -17,5 +17,11 @@
         "completed": false
       }
     ]
+  },
+  {
+    "name": "Tyagi Tyagi",
+    "email": "arpittyagi@gmail.com",
+    "password": "987654321",
+    "tasks": []
   }
 ]

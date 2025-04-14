@@ -1,4 +1,22 @@
 import React from 'react';
+import Navbar from '@/components/Navbar';
+
+export default async function Index() {
+    const data = await getData();
+
+    return (
+        <main>
+            <Navbar />
+            <h1 className="text-3xl font-bold align-center text-center m-4">
+                Hello from Frontend !!
+            </h1>
+            <h1 className="text-3xl font-bold align-center text-center m-4">
+                {data.message || 'Error fetching data'}
+            </h1>
+           
+        </main>
+    );
+}
 
 async function getData() {
     try {
@@ -16,18 +34,3 @@ async function getData() {
     }
 }
 
-export default async function Index() {
-    const data = await getData();
-
-    return (
-        <div>
-            <h1 className="text-3xl font-bold align-center text-center m-4">
-                Hello from Frontend !!
-            </h1>
-            <h1 className="text-3xl font-bold align-center text-center m-4">
-                {data.message || 'Error fetching data'}
-            </h1>
-           
-        </div>
-    );
-}
